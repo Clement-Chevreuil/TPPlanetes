@@ -97,26 +97,30 @@ public class PlaneteAdapter extends BaseAdapter {
                     listePlanetes.add(planettes);
 
                     nb = nb + 1;
-                    if(nb.equals(1))
+                    if(nb.equals(9))
                     {
                         but.setEnabled(true);
                     }
-                    if(listePlanetes.size() == 2)
 
-                    Toast.makeText(context, listePlanetes.get(0).getNom() + "\n" + listePlanetes.get(1).getNom(), Toast.LENGTH_SHORT).show();
+                }
+                else {
 
-                } else {
+
                     planettes.setNom(nomPlanete.getText().toString());
-
-                    String tailleChar = spinner.getSelectedItem().toString();
-                    int taille = Integer.parseInt(tailleChar);
-                    planettes.setPoid(taille);
-
                     listePlanetes.remove(planettes);
                     spinner.setEnabled(true);
                     spinadapter.notifyDataSetChanged();
                     nb = nb - 1;
                     but.setEnabled(false);
+
+                    for(int i = 0; i != listePlanetes.size() +1 ; i++ )
+                    {
+                        if(listePlanete.getAllData().get(i).getNom().equals(planettes.getNom()))
+                        {
+                            listePlanetes.remove(i);
+                        }
+
+                    }
                 }
             }
         });
@@ -133,7 +137,7 @@ public class PlaneteAdapter extends BaseAdapter {
                     {
                         if(listePlanete.getAllData().get(o).getNom().equals(listePlanetes.get(i).getNom()))
                         {
-                            phrase = phrase + " La planete " + listePlanetes.get(i).getNom()  + " a une taille de " + String.valueOf(listePlanete.getAllData().get(o).getPoid()) + "vous avez repondu " + listePlanetes.get(i).getPoid() + "\n";
+                            phrase = phrase + listePlanetes.get(i).getNom()  + " = " + String.valueOf(listePlanete.getAllData().get(o).getPoid()) + "Votre Reponse " + listePlanetes.get(i).getPoid() + "\n";
                         }
                     }
 
